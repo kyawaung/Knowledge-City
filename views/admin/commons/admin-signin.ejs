@@ -5,7 +5,6 @@
 <head>
   <% include ../partial/head %>
   <title>Knowledge Q&A Dashboard Template</title>
-
 </head>
 
 <body>
@@ -22,7 +21,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-            <h1>Create Account</h1>
+            <h1>Admin Sign In To Your Account</h1>
           </div>
           <!-- end col -->
           <div class="col-md-6 col-sm-5 co-xs-12 text-right">
@@ -32,7 +31,7 @@
                 </li>
                 <li><a href="#">Pages</a>
                 </li>
-                <li class="active">SIgn Up</li>
+                <li class="active">Sign In</li>
               </ol>
             </div>
             <!-- end bread -->
@@ -46,51 +45,50 @@
 
     <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
 
-    <!-- =-=-=-=-=-=-= Register Form =-=-=-=-=-=-= -->
-    <section class="section-padding-80 white" id="register">
+    <!-- =-=-=-=-=-=-= Login Form =-=-=-=-=-=-= -->
+    <section class="section-padding-80 white" id="login">
       <div class="container">
         <div class="row">
-          <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+          <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 
             <div class="box-panel">
 
               <!-- buttons top -->
-              <a href="#" class="btn btn-default facebook"><i class="fa fa-facebook icons"></i> Sign Up with Facebook</a>
-              <a href="#" class="btn btn-default google"><i class="fa fa-google-plus icons"></i> Sign Up with Google</a>
+              <!-- <a href="#" class="btn btn-default facebook"><i class="fa fa-facebook icons"></i> Sign In with Facebook</a>
+              <a href="#" class="btn btn-default google"><i class="fa fa-google-plus icons"></i> Sign In with Google</a> -->
               <!-- end buttons top -->
 
-              <p class="text-center margin-top-10"><span class="span-line">OR</span>
-              </p>
+              <!-- <p class="text-center margin-top-10"><span class="span-line">OR</span>
+              </p> -->
 
               <!-- form login -->
-              <form id="sign_up" method="POST">
+              <form name="frm" id="sign_in" method="POST">
                 <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" name="username" placeholder="Your Full Name" class="form-control">
+                  <label style="font-family:zawgyi-one">အီးေမး</label>
+                  <input type="email" name="email" placeholder="မင္းရဲ့အီးေမး" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" id="email" name="email" placeholder="Your Email" class="form-control">
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
+                  <label style="font-family:zawgyi-one">Password</label>
                   <input type="password" name="password" placeholder="Your Password" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label>Confirm Password</label>
-                  <input type="password" name="confirm" placeholder="Verify Your Password" class="form-control">
-                </div>
-                <div class="form-group">
                   <div class="row">
-
-                    <div class="col-xs-12 text-right">
-                      <p class="help-block"><a data-toggle="modal" href="login.html">Already Register Sing In</a>
+                    <div class="col-xs-6">
+                      <div class="checkbox flat-checkbox">
+                        <label>
+                          <input type="checkbox" name="rememberme" id="rememberme">
+                          <span class="fa fa-check"></span> Remember me?
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <p class="help-block"><a data-toggle="modal" href="#myModal">Forgot password?</a>
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <button class="btn btn-primary btn-lg btn-block">Create Account</button>
+                <button class="btn btn-primary btn-lg btn-block">Log In</button>
 
               </form>
               <!-- form login -->
@@ -103,7 +101,7 @@
       </div>
       <!-- end container -->
     </section>
-    <!-- =-=-=-=-=-=-= Register Form End =-=-=-=-=-=-= -->
+    <!-- =-=-=-=-=-=-= Login Form   End =-=-=-=-=-=-= -->
 
     <!-- =-=-=-=-=-=-= Our Clients =-=-=-=-=-=-= -->
     <section class="custom-padding" id="clients">
@@ -117,7 +115,7 @@
 
             <!-- client-item client-item-style-2 -->
             <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="/images/clients/client_5.png"> </a>
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_5.png"> </a>
             </div>
             <!-- /client-item client-item-style-2 -->
 
@@ -129,7 +127,7 @@
 
             <!-- client-item client-item-style-2 -->
             <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="/images/clients/client_6.png"> </a>
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_6.png"> </a>
             </div>
             <!-- /client-item client-item-style-2 -->
 
@@ -141,7 +139,7 @@
 
             <!-- client-item client-item-style-2 -->
             <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="/images/clients/client_7.png"> </a>
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_7.png"> </a>
             </div>
             <!-- /client-item client-item-style-2 -->
 
@@ -153,7 +151,7 @@
 
             <!-- client-item client-item-style-2 -->
             <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="/images/clients/client_8.png"> </a>
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_8.png"> </a>
             </div>
             <!-- /client-item client-item-style-2 -->
 
@@ -165,7 +163,7 @@
 
             <!-- client-item client-item-style-2 -->
             <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="/images/clients/client_9.png"> </a>
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_9.png"> </a>
             </div>
             <!-- /client-item client-item-style-2 -->
 
@@ -177,7 +175,7 @@
 
             <!-- client-item client-item-style-2 -->
             <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="/images/clients/client_10.png"> </a>
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_10.png"> </a>
             </div>
             <!-- /client-item client-item-style-2 -->
 
@@ -199,33 +197,14 @@
   <% include ../partial/script %>
   <script type="text/javascript">
   $(function () {
-      $.validator.addMethod("pwcheck", function(value) {
-            return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
-                && /[a-z]/.test(value) // has a lowercase letter
-                && /[A-Z]/.test(value) // has a uppercase letter
-                && /\d/.test(value) // has a digit
-      });
-      $.validator.addMethod("pwcheck2", function(value){
-        if( value.indexOf($('#email').val()) >= 0 ){
-          return false;
-        }
-        return true;
-      });
-      $('#sign_up').validate({
+      $('#sign_in').validate({
           rules: {
+              'terms': {
+                  required: true
+              },
               'confirm': {
                   equalTo: '[name="password"]'
-              },
-              'password': {
-                pwcheck: true,
-                pwcheck2: true
               }
-          },
-          messages: {
-            password: {
-              pwcheck: "Please input at least 1 Upper, 1 Lover, 1 digit...",
-              pwcheck2: "Do not contain your email."
-            }
           },
           highlight: function (input) {
               console.log(input);
@@ -239,18 +218,26 @@
               $(element).parents('.form-group').append(error);
           }
       });
-      $('#email').blur(function(){
-        var data = {email: $('#email').val()};
-        if(data.email == '') return;
-        $.ajax({url: "/signup/duplicate", data: data, type: 'POST', success: function(result){
-          if(result.status == false){
-            alert(result.msg);
-            $('#email').val('');
-            $('#email').focus();
-          }
-        }});
-      });
-  });
+
+
+  // when submit
+  frm.onsubmit = function(){
+    if(frm.rememberme.checked){
+      //if checked remember then save cookieParser
+      $.cookie("email", frm.email.value, { expires:7});
+    }else{
+      //else remove cookies
+      $.removeCookie("email");
+    }
+  }
+
+  //on load
+  if($.cookie("email")){
+    frm.email.value = $.cookie("email");
+    frm.rememberme.checked = true;
+  }
+});
+
   </script>
 </body>
 

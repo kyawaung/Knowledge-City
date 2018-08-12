@@ -4,7 +4,7 @@ var User = require('../../model/User');
 
 /* GET home page. */
 router.get('/user', function(req, res, next) {
-  res.render('user/commons/home');
+  res.render('user/commons/user-home');
 });
 
 /* GET signup page. */

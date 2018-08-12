@@ -62,7 +62,7 @@
               </p> -->
 
               <!-- form login -->
-              <form name="frm" id="sign_in" method="POST">
+              <form name="frm" action="/admin/signin" id="sign_in" method="POST" autocomplete="off">
                 <div class="form-group">
                   <label style="font-family:zawgyi-one">အီးေမး</label>
                   <input type="email" name="email" placeholder="မင္းရဲ့အီးေမး" class="form-control">
@@ -77,7 +77,7 @@
                       <div class="checkbox flat-checkbox">
                         <label>
                           <input type="checkbox" name="rememberme" id="rememberme">
-                          <span class="fa fa-check"></span> Remember me?
+                          <span class="fa fa-check" for="rememberme"></span> Remember me?
                         </label>
                       </div>
                     </div>

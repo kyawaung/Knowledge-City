@@ -10,6 +10,7 @@ var flash = require('express-flash');
 var indexRouter = require('./routes/user/index');
 var usersRouter = require('./routes/user/users');
 var adminRouter = require('./routes/admin/index');
+var knowledge = require('./routes/admin/knowledge');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(flash());//after cookie, session
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', adminRouter);
+app.use('/', knowledge);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

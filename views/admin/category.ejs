@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <% include partial/head1 %>
+    <title>Carbon - Admin Template</title>
+</head>
+<body class="sidebar-fixed header-fixed">
+<div class="page-wrapper">
+    <div class="page-header">
+        <% include partial/header1 %>
+    </div>
+
+    <div class="main-container">
+        <% include partial/leftside %>
+        <div class="content">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            Category List
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Category Name</th>
+                                        <th>Modify Function</th>
+                                        <th colspan="2">Delete Function</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="dTable">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modify">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:lightblue">
+                  <h5 class="modal-title" id="exampleModalLabel">Modify Category</h5>
+              </div>
+              <input type="hidden" name="catid" id="catid" value="">
+              <div class="modal-body" style="height:100px;">
+                <table >
+                  <thead>
+                    <tr>
+                      <th>Category Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="text" name="" id="myanmarname" value=""></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer" style="background-color:lightblue">
+                  <button type="button" class="btn btn-light" data-dismiss="modal">CANCEL</button>
+                  <button type="button" id="btnSave" class="btn btn-primary">SAVE</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="Add">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:lightblue">
+            <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+        </div>
+        <div class="modal-body" style="height:100px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Category Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" name="" id="myanmarname1" value=""></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer" style="background-color:lightblue">
+            <button type="button" class="btn btn-light" data-dismiss="modal">CANCEL</button>
+            <button type="button" id="btnAdd" class="btn btn-primary">ADD</button>
+        </div>
+    </div>
+</div>
+</div>
+
+      <% include partial/script1 %>
+      <!-- Demo Js -->
+      <script src="/js/demo.js"></script>
+      <script type="text/javascript">
+        $(function () {
+          // select list on load
+          $.ajax({
+            method: "POST",
+            url: "/category",
+            data: {name: "Jhon", location: "Boston"}
+          }).done(function( rtn ){
+            var dTable = document.getElementById('dTable');
+            for(var i=1; i<= rtn.categories.length; i++){
+              var row = dTable.insertRow(dTable.rows.length);
+              var cell0 = row.insertCell(0);
+              cell0.appendChild(document.createTextNode(i));
+              var cell1 = row.insertCell(1);
+              cell1.appendChild(document.createTextNode(rtn.categories[i-1].name.my));
+              var cell2 = row.insertCell(2);
+              var btnModify = document.createElement("input");
+              btnModify.type = "button";
+              btnModify.value = "Modify";
+              cell2.appendChild(btnModify);
+              btnModify.setAttribute('data-row-key', rtn.categories[i-1]._id);
+              btnModify.onclick = function(){
+                view($(this).attr('data-row-key'));
+              }
+              var cell3 = row.insertCell(3);
+              var btnDelete = document.createElement("input");
+              btnDelete.type = "button";
+              btnDelete.value = "Delete";
+              cell3.appendChild(btnDelete);
+              btnDelete.setAttribute('data-row-key', rtn.categories[i-1]._id);
+              btnDelete.onclick = function(){
+                dele($(this).attr('data-row-key'));
+              }
+              if( i == rtn.categories.length){
+                var cell4 = row.insertCell(4);
+                var btnAdd = document.createElement("span");
+                btnAdd.setAttribute("class","fa fa-plus-circle");
+                btnAdd.setAttribute("style","font-size: 45px;");
+                cell4.appendChild(btnAdd);
+                //btnAdd.setAttribute('data-row-key', rtn.categories[i-1]._id);
+                btnAdd.onclick = function(){
+                  add($(this).attr('data-row-key'));
+                }
+              }
+            }
+          }).fail(function(err){
+            console.log('ERROR',err);
+          }); // end of select list
+
+          // modify view
+          function view(id){
+            $modal = $("#modify");
+            $modal.modal('show');
+            $.ajax({
+              method: "POST",
+              url: "/view/"+id
+            }).done(function( rtn ){
+
+              var categories = rtn.categories;
+              console.log(categories._id);
+              document.getElementById('myanmarname').value = categories.name.my;
+              document.getElementById("catid").value = categories._id;
+          }).fail(function(err){
+            console.log('ERROR', err);
+          });
+        } // end of modify view
+
+          // modify save button event
+          btnSave.onclick = function(){
+            var name1 = document.getElementById('myanmarname').value;
+            var catid = document.getElementById('catid').value;
+            $.ajax({
+              method: "POST",
+              url: "/modify",
+              data:{'myanmarname':name1, 'catid': catid},
+              success: function (resultData) {
+                  location.href = '/category';
+              },
+            }).done(function(rtn){
+              console.log(rtn);
+            }).fail(function(err){
+              console.log('ERROR', err);
+            });
+          }// end of modify save button event
+
+          //Add view
+          function add(id){
+            $modal = $("#Add");
+            $modal.modal('show');
+            $.ajax({
+              method: "POST",
+              url: "/add/"+id
+            }).done(function( rtn ){
+              var categories = rtn.categories;
+              console.log(categories._id);
+              document.getElementById('myanmarname1').value = categories.name.my;
+          }).fail(function(err){
+            console.log('ERROR', err);
+          });
+        }
+        // end of add view
+
+        // Add button save event
+        btnAdd.onclick = function(){
+          var name1 = document.getElementById('myanmarname1').value;
+          $.ajax({
+            method: "POST",
+            url: "/add",
+            data:{'myanmarname':name1},
+            success: function (resultData) {
+                location.href = '/category';
+            },
+          }).done(function(rtn){
+            console.log(rtn);
+          }).fail(function(err){
+            console.log('ERROR', err);
+          });
+        }
+         // end of Add button save event
+
+        });
+        function detail(id){
+          location.href = '/view/'+id;
+        }
+
+
+      </script>
+</body>
+</html>

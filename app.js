@@ -7,10 +7,10 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var flash = require('express-flash');
 
-var indexRouter = require('./routes/user/index');
-var usersRouter = require('./routes/user/users');
-var adminRouter = require('./routes/admin/index');
-var knowledge = require('./routes/admin/knowledge');
+var indexRouter = require('./routes/index');
+var user = require('./routes/user/index');
+var admin = require('./routes/admin/index');
+var category = require('./routes/admin/category');
 
 var app = express();
 
@@ -29,6 +29,10 @@ mongoose.connect('mongodb://127.0.0.1/knowledgedb');// dirverName://dbIP/dbName
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// plugins in node modules
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
+app.use('/js', express.static(__dirname + '/node_modules/jquery-validation/dist'));
+
 //session
 app.use(session({
   secret: 'XailEJS#@S12S', //any string for Security
@@ -38,9 +42,9 @@ app.use(session({
 app.use(flash());//after cookie, session
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/', adminRouter);
-app.use('/', knowledge);
+app.use('/user', user)
+app.use('/admin', admin);
+app.use('/category', category);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

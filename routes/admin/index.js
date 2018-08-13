@@ -39,8 +39,8 @@ router.get('/init', function(req, res, next) {
 
 
 /* GET admin home page. */
-router.get('/admin/home', function(req, res, next) {
-  res.render('admin/commons/admin-home');
+router.get('/', function(req, res, next) {
+  res.render('admin/home');
 });
 
 module.exports = router;

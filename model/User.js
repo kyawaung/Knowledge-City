@@ -21,6 +21,10 @@ var UserSchema = new Schema({
     required: true,
     trim: true // remove both-side white space
   },
+  role: {
+    type: String,
+    default: 'USER'
+  },
   updated: {
     type: Date,
     default: Date.now

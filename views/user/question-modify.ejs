@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include partial/head %>
+  <title>Knowledge Q&A Dashboard Template</title>
+</head>
+
+<body>
+  <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
+  <div class="preloader"><span class="preloader-gif"></span>
+  </div>
+  <% include partial/header %>
+
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+<!--  <div class="main-content-area">-->
+
+
+
+    <!-- =-=-=-=-=-=-= Post Question  =-=-=-=-=-=-= -->
+    <section class="section-padding-80 white" id="modify">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-8 ">
+
+            <div class="box-panel">
+
+              <h2>Post Your Question</h2>
+              <hr>
+              <!-- form login -->
+              <form class="margin-top-40" id="frm" method="post" action="/user/modify" name="frm">
+                <input type="hidden" name="que_id" value="<%= que._id %>">
+                <div class="form-group">
+                  <label>Question Title <span class="required">*</span></label>
+                  <input type="text" name="questionTitle" id="questionTitle" value="<%= que.title %>" placeholder="Your question title" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Category <span class="required">*</span></label>
+                  <select class="questions-category form-control" name="category">
+                    <option value="0"><%= que.category %></option>
+                    <% for(var i = 0; i< cat.length; i++){%>
+                    <option value="0"><%= cat[i].name.my %></option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Question Detials <span class="required">*</span></label>
+                  <textarea cols="12" rows="12" placeholder="Post Your Question Details Here....." id="message" name="message" class="form-control"><%= que.detail.text %></textarea>
+                </div>
+
+                <button type="button" id="save" class="btn btn-primary pull-right">Publish Your Question</button>
+
+              </form>
+              <!-- form login -->
+
+            </div>
+          </div>
+
+          <!-- Blog Right Sidebar -->
+          <div class="col-sm-12 col-xs-12 col-md-4">
+
+          </div>
+          <!-- Blog Right Sidebar End -->
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Post QuestionEnd =-=-=-=-=-=-= -->
+
+  <!--</div>-->
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+
+  <% include partial/footer %>
+  <% include partial/script %>
+  <!-- For THis Page Only -->
+  <script src="js/select2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.tagsinput.min.js"></script>
+  <script type="text/javascript">
+        save.onclick = function() {
+          var formData = {
+            questionTitle: frm.questionTitle.value,
+            message: frm.message.value
+            //category: frm.category.value
+           }
+          console.log(formData);
+          $.post('/user/modify/<%= que._id %>',
+                formData,
+                function(data, status, xhr) {
+                }).done(function(rtn) {
+                  alert('Request done!');
+                  location.href= "/user/view/"+rtn.id;
+                }).fail(function(jqxhr, settings, ex) {
+                  alert('failed, ' + ex);
+                });
+        }
+  </script>
+</body>
+
+</html>

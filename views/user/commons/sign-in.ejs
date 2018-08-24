@@ -15,37 +15,10 @@
 
   <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
   <div class="main-content-area">
-
-    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
-    <section class="page-title">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-            <h1>User Sign In To Your Account</h1>
-          </div>
-          <!-- end col -->
-          <div class="col-md-6 col-sm-5 co-xs-12 text-right">
-            <div class="bread">
-              <ol class="breadcrumb">
-                <li><a href="#">Home</a>
-                </li>
-                <li><a href="#">Pages</a>
-                </li>
-                <li class="active">Sign In</li>
-              </ol>
-            </div>
-            <!-- end bread -->
-          </div>
-          <!-- end col -->
-        </div>
-        <!-- end row -->
-      </div>
-      <!-- end container -->
-    </section>
-
-    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
-
     <!-- =-=-=-=-=-=-= Login Form =-=-=-=-=-=-= -->
+    <div class="col-md-7 col-sm-8 co-xs-12 text-right">
+      <h2>Sign In To Your Account</h2>
+    </div>
     <section class="section-padding-80 white" id="login">
       <div class="container">
         <div class="row">
@@ -64,8 +37,8 @@
               <!-- form login -->
               <form name="frm" id="sign_in" method="POST">
                 <div class="form-group">
-                  <label style="font-family:zawgyi-one">အီးေမး</label>
-                  <input type="email" name="email" placeholder="မင္းရဲ့အီးေမး" class="form-control">
+                  <label style="font-family:zawgyi-one">Email</label>
+                  <input type="email" name="email" placeholder="Your Email" class="form-control">
                 </div>
                 <div class="form-group">
                   <label style="font-family:zawgyi-one">Password</label>
@@ -103,98 +76,15 @@
     </section>
     <!-- =-=-=-=-=-=-= Login Form   End =-=-=-=-=-=-= -->
 
-    <!-- =-=-=-=-=-=-= Our Clients =-=-=-=-=-=-= -->
-    <section class="custom-padding" id="clients">
-      <div class="container">
 
-        <!-- Row -->
-        <div class="row">
-
-          <!-- col-md-2 client-block -->
-          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
-
-            <!-- client-item client-item-style-2 -->
-            <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_5.png"> </a>
-            </div>
-            <!-- /client-item client-item-style-2 -->
-
-          </div>
-          <!-- /col-md-2 client-block -->
-
-          <!-- col-md-2 client-block -->
-          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
-
-            <!-- client-item client-item-style-2 -->
-            <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_6.png"> </a>
-            </div>
-            <!-- /client-item client-item-style-2 -->
-
-          </div>
-          <!-- /col-md-2 client-block -->
-
-          <!-- col-md-2 client-block -->
-          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
-
-            <!-- client-item client-item-style-2 -->
-            <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_7.png"> </a>
-            </div>
-            <!-- /client-item client-item-style-2 -->
-
-          </div>
-          <!-- /col-md-2 client-block -->
-
-          <!-- col-md-2 client-block -->
-          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
-
-            <!-- client-item client-item-style-2 -->
-            <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_8.png"> </a>
-            </div>
-            <!-- /client-item client-item-style-2 -->
-
-          </div>
-          <!-- /col-md-2 client-block -->
-
-          <!-- col-md-2 client-block -->
-          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
-
-            <!-- client-item client-item-style-2 -->
-            <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_9.png"> </a>
-            </div>
-            <!-- /client-item client-item-style-2 -->
-
-          </div>
-          <!-- /col-md-2 client-block -->
-
-          <!-- col-md-2 client-block -->
-          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
-
-            <!-- client-item client-item-style-2 -->
-            <div class="client-item client-item-style-2">
-              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_10.png"> </a>
-            </div>
-            <!-- /client-item client-item-style-2 -->
-
-          </div>
-          <!-- /col-md-2 client-block -->
-
-        </div>
-        <!-- Row End -->
-
-      </div>
-      <!-- end container -->
-    </section>
-    <!-- =-=-=-=-=-=-= Our Clients -end =-=-=-=-=-=-= -->
 
   </div>
   <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
 
   <% include ../partial/footer %>
   <% include ../partial/script %>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <script type="text/javascript">
   $(function () {
       $('#sign_in').validate({

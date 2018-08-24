@@ -96,6 +96,34 @@
 </div>
 </div>
 
+<div class="modal fade" id="Delete">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:lightblue">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
+      </div>
+      <input type="hidden" name="catid" id="catid" value="">
+      <div class="modal-body" style="height:150px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Category Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" name="" id="myanmarname2" value=""></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer" style="background-color:lightblue">
+          <button type="button" id="btnDelete" class="btn btn-primary">DELETE</button>
+      </div>
+  </div>
+</div>
+</div>
+
       <% include partial/script1 %>
       <!-- Demo Js -->
       <script src="/js/demo.js"></script>
@@ -172,7 +200,7 @@
             var catid = document.getElementById('catid').value;
             $.ajax({
               method: "POST",
-              url: "/modify",
+              url: "/category/modify",
               data:{'myanmarname':name1, 'catid': catid},
               success: function (resultData) {
                   location.href = '/category';
@@ -206,7 +234,7 @@
           var name1 = document.getElementById('myanmarname1').value;
           $.ajax({
             method: "POST",
-            url: "/add",
+            url: "/category/add",
             data:{'myanmarname':name1},
             success: function (resultData) {
                 location.href = '/category';
@@ -218,6 +246,43 @@
           });
         }
          // end of Add button save event
+
+         // delete view
+         function dele(id){
+           $modal = $("#Delete");
+           $modal.modal('show');
+           $.ajax({
+             method: "POST",
+             url: "/dele/"+id
+           }).done(function( rtn ){
+             var categories = rtn.categories;
+             console.log(categories._id);
+             document.getElementById('myanmarname2').value = categories.name.my;
+             document.getElementById("catid").value = categories._id;
+         }).fail(function(err){
+           console.log('ERROR', err);
+         });
+       }
+       // end of delete view
+
+       // Delete button save event
+       btnDelete.onclick = function(){
+         var name1 = document.getElementById('myanmarname2').value;
+         var catid = document.getElementById('catid').value;
+         $.ajax({
+           method: "POST",
+           url: "/category/dele",
+           data:{'myanmarname':name1, 'catid': catid},
+           success: function (resultData) {
+               location.href = '/category';
+           },
+         }).done(function(rtn){
+           console.log(rtn);
+         }).fail(function(err){
+           console.log('ERROR', err);
+         });
+       }
+        // end of Delete button save event
 
         });
         function detail(id){

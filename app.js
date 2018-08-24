@@ -41,10 +41,33 @@ app.use(session({
 }));
 app.use(flash());//after cookie, session
 
+//Set session // after sessionsa
+app.use(function(req, res, next){
+  res.locals.user = req.session.user;
+  res.locals.active = req.path; //set active path from menu
+  next();
+});
+
 app.use('/', indexRouter);
+// session check for user, admin...
+app.use(function(req, res, next){
+  // TODO test session. must delete!!
+   req.session.user = {
+    _id: '5b7296997a2c042268443cdd',
+    name: 'Admin',
+    email: 'nay@gmail.com',
+    role: 'ADMIN'};
+   if(req.session.user){
+       next();
+ }else{
+     req.flash('warn', 'Authorization failed! Please login');
+     req.flash('forward', req.path);
+     res.redirect('/signin'); //redirect to other page
+  }
+});
 app.use('/user', user)
 app.use('/admin', admin);
-app.use('/category', category);
+app.use('/', category);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

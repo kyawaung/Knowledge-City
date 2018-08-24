@@ -23,7 +23,7 @@ router.post('/signup', function(req, res, next) {
         if(err) throw err;
         req.flash('success', 'Registration successful.Welcome to '+user.name);
         console.log('Name', user.name);
-        res.redirect('/user/signin');
+        res.redirect('/signin');
       });
     }
 
@@ -31,24 +31,41 @@ router.post('/signup', function(req, res, next) {
 });
 
 /* GET signin page. */
-router.get('/user/signin', function(req, res, next) {
+router.get('/signin', function(req, res, next) {
   res.render('user/commons/sign-in');
 });
 
 /* POST signin action. */
-router.post('/user/signin', function(req, res, next) {
+router.post('/signin', function(req, res, next) {
   // make model using req.body
   User.findOne({ email: req.body.email}, function(err, user){
     if(err) throw err;
-    console.log('selected user:', user);
     if(user == null || !User.compare(req.body.password, user.password)){
-      req.flash('warn', 'Email not exists or password not matched!!');
-      res.redirect('/user/signin');
+      req.flash('warning', 'Email not exists or password not matched!!');
+      res.redirect('/signin');
     }else{
-      req.session.user = {_id: user._id, name: user.name, email: user.email};
-      res.redirect('/user');
+      req.session.user = {_id: user._id, name: user.name, email: user.email, role: user.role};
+      if(user.role == 'ADMIN'){
+        res.redirect('/admin');
+      }else res.redirect('/user');
     }// user exists
   });
+});
+
+/* INIT admin account  */
+router.get('/init', function(req, res, next) {
+  // make model using req.body
+  var user = new User();
+  user.name = 'Admin';
+  user.email = 'nay@gmail.com';
+  user.password = 'nay1500';
+  user.role = 'ADMIN';
+
+      user.save(function(err, result){
+        if(err) throw err;
+        req.flash('success', 'Registration successful.Welcome to '+user.name);
+        res.redirect('/signin');
+      });
 });
 
 /*post check duplication.*/
@@ -59,6 +76,12 @@ router.post('/signup/duplicate', function(req, res, next){
     if(rtn != null) res.json({status: false, msg: 'Duplicate email'});
     else res.json({status: true});
   });
+});
+
+/* GET user sigout. */
+router.get('/signout', function(req, res, next) {
+  req.session.destroy();
+  res.redirect('/user');
 });
 
 module.exports = router;

@@ -3,7 +3,7 @@ var dateformat = require('dateformat');
 
 //Define a schema
 var Schema = mongoose.Schema;
-var QuestionSchema = new Schema({
+var KnowledgeSchema = new Schema({
     // define data fields
     title: {
         type: String,
@@ -14,6 +14,10 @@ var QuestionSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Categories',
     },
+    detail: {
+        text: String,
+        html: String,
+    },
     dispOrder: {
         type: Number,
         required: true,
@@ -23,7 +27,7 @@ var QuestionSchema = new Schema({
         type: Number,
         default: 0,
     },
-    answers:{
+    comments: {
       type: Number,
       default: 0,
     },
@@ -51,11 +55,11 @@ var QuestionSchema = new Schema({
     },
 });
 
-QuestionSchema.virtual('updatedDt').get(function() {
+KnowledgeSchema.virtual('updatedDt').get(function() {
     return dateformat(this.updated, 'dd/mm/yyyy HH:MM');
 });
 
-QuestionSchema.virtual('insertedDt').get(function() {
+KnowledgeSchema.virtual('insertedDt').get(function() {
     return dateformat(this.inserted, 'dd/mm/yyyy HH:MM');
 });
-module.exports = mongoose.model('Questions', QuestionSchema); // Questions: collection
+module.exports = mongoose.model('Knowledges', KnowledgeSchema); // Knowledges: collection

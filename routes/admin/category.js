@@ -5,12 +5,12 @@ var Category = require('../../model/Category');
 var upload = multer({ dest: 'public/upload' });
 
 /* GET manage category page. */
-router.get('/category', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('admin/category');
 });
 
 // POST category action
-router.post('/category', function(req, res, next) {
+router.post('/', function(req, res, next) {
   Category.find({}, function(err, doc){
     if(err) res.json(500, {'err': err.message});
     else res.json({ categories: doc});
@@ -45,7 +45,7 @@ router.post('/view/:id', function(req, res, next) {
     });
   });
 
-router.post('/category/modify', function(req, res, next) {
+router.post('/modify', function(req, res, next) {
   Category.findById(req.body.catid, function(err, category){
       category.name.my = req.body.myanmarname;
       category.save(function (err, rtn){
@@ -63,7 +63,7 @@ router.post('/category/modify', function(req, res, next) {
       });
     });
 
-  router.post('/category/add',upload.any(), function(req, res, next) {
+  router.post('/add',upload.any(), function(req, res, next) {
     var category = new Category();
     category.name.my = req.body.myanmarname;
     for(var i in req.files){
@@ -83,7 +83,7 @@ router.post('/category/modify', function(req, res, next) {
           });
         });
 
-        router.post('/category/dele', function(req, res, next) {
+        router.post('/dele', function(req, res, next) {
           Category.findByIdAndRemove(req.body.catid, function(err, rtn){
               if(err) res.json(500, {'err': err.message});
               else res.json({ categories: rtn});

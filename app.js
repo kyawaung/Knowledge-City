@@ -8,9 +8,8 @@ var session = require('express-session');
 var flash = require('express-flash');
 
 var indexRouter = require('./routes/index');
-var user = require('./routes/user/index');
-var admin = require('./routes/admin/index');
-var category = require('./routes/admin/category');
+var members = require('./routes/members');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -65,9 +64,8 @@ app.use(function(req, res, next){
      res.redirect('/signin'); //redirect to other page
   }
 });
-app.use('/user', user)
+app.use('/members', members);
 app.use('/admin', admin);
-app.use('/', category);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <% include partial/head %>
+  <% include ../partial/head %>
   <title>Knowledge Q&A Dashboard Template</title>
 </head>
 
@@ -11,7 +11,7 @@
   <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
   <div class="preloader"><span class="preloader-gif"></span>
   </div>
-  <% include partial/header %>
+  <% include ../partial/header %>
 
   <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
 <!--  <div class="main-content-area">-->
@@ -26,14 +26,14 @@
 
             <div class="box-panel">
 
-              <h1>Confirm Your Question</h1>
+              <h1>Confirm Your Knowledge</h1>
               <hr>
               <div class="post">
             		<header class="post-header">
-            			<h2><%= que.title %></h2>
+            			<h2><%= know.title %></h2>
             			<div class="post-meta">
             				<div class="post-meta-item">
-            					<i class="fa fa-folder-o"></i> Category name
+            					<i class="fa fa-folder-o"></i> <%= know.category.name.my %>
             				</div>
             			</div>
             		</header>
@@ -41,12 +41,10 @@
             			<div class="col col-lg-9 col-md-9">
                     <div>
                       <h3>Question Detail</h3>
-                      <%= que.timeago%><br>
-                      <%= que.hits %> VIEWS <br>
-                      <%= que.detail.text %>
+                      <%= know.detail.text %><br>
                     </div>
                     <p></p>
-                    <center><b><a href="/user/question" id="list">Go to Question list</a></b></center>
+                    <center><b><a href="/members/knowledge/list" id="list">Go to Knowledge list</a></b></center>
                   </div>
                 </div>
                       	<hr>
@@ -76,23 +74,23 @@
   <!--</div>-->
   <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
 
-  <% include partial/footer %>
-  <% include partial/script %>
+  <% include ../partial/footer %>
+  <% include ../partial/script %>
   <!-- For THis Page Only -->
   <script src="js/select2.min.js"></script>
   <script type="text/javascript" src="js/jquery.tagsinput.min.js"></script>
   <script type="text/javascript">
     $('#btnModify').click(function () {
-      location.href = '/user/modify/<%=que._id%>';
+      location.href = '/members/knowledge/modify/<%=know._id%>';
     });
 
     $('#btnStart').click(function () {
-      location.href = '/user/detail/<%=que._id%>';
+      location.href = '/members/knowledge/detail/<%=know._id%>';
     });
 
     $('#btnDelete').click(function () {
-      if(confirm('Are you sure? After click to DELETE button, your campaign will delete.'))
-      location.href= '/user/delete/'+'<%= que._id %>';
+      if(confirm('Are you sure? After click to DELETE button, your knowledge will delete.'))
+      location.href= '/members/knowledge/delete/'+'<%= know._id %>';
     });
   </script>
   <script type="text/javascript">
@@ -103,12 +101,12 @@
       category: frm.category.value
      }
     console.log(formData);
-    $.post('/user/question-modify',
+    $.post('/members/knowledge/view/<%= know._id %>',
           formData,
           function(data, status, xhr) {
-          }).done(function() {
+          }).done(function(rtn) {
             alert('Request done!');
-            location.href= "/user/view/"+status.id;
+            location.href= "/members/knowledge/view/"+rtn.id;
           }).fail(function(jqxhr, settings, ex) {
             alert('failed, ' + ex);
           });

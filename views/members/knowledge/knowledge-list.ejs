@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <% include partial/head %>
+  <% include ../partial/head %>
   <title>Knowledge Q&A Dashboard Template</title>
 </head>
 
@@ -11,7 +11,7 @@
   <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
   <div class="preloader"><span class="preloader-gif"></span>
   </div>
-  <% include partial/header %>
+  <% include ../partial/header %>
   <!-- =-=-=-=-=-=-= HOME =-=-=-=-=-=-= -->
   <div class="full-section search-section">
     <img alt="" class="full-section::before" src="full-section.parallax-home">
@@ -28,7 +28,7 @@
   <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
   <div class="main-content-area">
     <!-- =-=-=-=-=-=-= Latest Questions  =-=-=-=-=-=-= -->
-    <form name="frm" action="/user/question" method="post">
+    <form name="frm" action="/members/knowledge/list" method="post">
       <input type="hidden" name="currpage">
     <section class="white question-tabs padding-bottom-80" id="latest-post">
       <div class="container">
@@ -42,7 +42,7 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                        <h1>All Questions</h1>
+                        <h1>All Knowledges</h1>
                       </div>
                     </div>
                     <!-- end row -->
@@ -56,25 +56,24 @@
                 <div id="tab1" class="tab-pane active">
                   <!-- Question Listing -->
                   <div class="listing-grid">
-                    <% for(var i = 0; i< questions.length; i++){%>
+                    <% for(var i = 0; i< knowledges.length; i++){%>
                     <div class="row">
                       <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
                         <a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
-													<img alt="" class="img-responsive center-block" src="images/authors/1.jpg">
+													<img alt="" class="img-responsive center-block" src="images/Knowledge.jpg">
 												</a>
                       </div>
                       <div class="col-md-7 col-sm-8  col-xs-12">
-                        <h3><a  href="#"><%= questions[i].title%></a></h3>
-                          <p><%= questions[i].detail.text %></p>
-                        <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i><%= questions[i].timeago%></span> <span><i class="fa fa fa-eye" aria-hidden="true"></i> <%= questions[i].hits %> Views</span>
+                        <h3><a  href="/members/knowledge/detail/<%= knowledges[i]._id %>"><%= knowledges[i].title%></a></h3>
+                        <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i><%= knowledges[i].timeago%></span> <span><i class="fa fa fa-eye" aria-hidden="true"></i> <%= knowledges[i].hits %> Views</span>
                         </div>
                       </div>
                       <div class="col-md-3 col-sm-2 col-xs-12">
                         <ul class="question-statistic">
-                          <li class="active"> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Answers"><span>2</span></a>
+                          <li class="active"> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Comments"><span><%= knowledges[i].comments %></span></a>
                           </li>
-                          <li> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span>0</span></a>
-                          </li>
+                          <!-- <li> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span>0</span></a>
+                          </li> -->
                         </ul>
                       </div>
                     </div>
@@ -127,8 +126,8 @@
   </form>
 </div>
     <!-- =-=-=-=-=-=-= Latest Questions  End =-=-=-=-=-=-= -->
-  <% include partial/footer %>
-  <% include partial/script %>
+  <% include ../partial/footer %>
+  <% include ../partial/script %>
   <script src="/js/demo.js"></script>
   <script type="text/javascript">
     function go(page){
@@ -141,7 +140,7 @@
     });
     $("#perpage").val(<%= paging.perpage %>);
     function detail(id){
-      location.href = '/user/question';
+      location.href = '/members/knowledge/list';
     }
   </script>
 </body>

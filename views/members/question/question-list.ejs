@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partial/head %>
+  <title>Knowledge Q&A Dashboard Template</title>
+</head>
+
+<body>
+  <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
+  <div class="preloader"><span class="preloader-gif"></span>
+  </div>
+  <% include ../partial/header %>
+  <!-- =-=-=-=-=-=-= HOME =-=-=-=-=-=-= -->
+  <div class="full-section search-section">
+    <img alt="" class="full-section::before" src="full-section.parallax-home">
+    <div class="search-area container">
+      <h3 class="search-title">Have a Question?</h3>
+      <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p>
+      <form autocomplete="off" method="get" class="search-form clearfix" id="search-form">
+        <input type="text" title="* Please enter a search term!" placeholder="Type your search terms here" class="search-term " autocomplete="off">
+        <input type="submit" value="Search" class="search-btn">
+      </form>
+    </div>
+  </div>
+  <!-- =-=-=-=-=-=-= HOME END =-=-=-=-=-=-= -->
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+  <div class="main-content-area">
+    <!-- =-=-=-=-=-=-= Latest Questions  =-=-=-=-=-=-= -->
+    <form name="frm" action="/members/question/list" method="post">
+      <input type="hidden" name="currpage">
+    <section class="white question-tabs padding-bottom-80" id="latest-post">
+      <div class="container">
+        <div class="row">
+          <!-- Content Area Bar -->
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <!-- Tabs -->
+                <section class="page-title">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+                        <h1>All Questions</h1>
+                      </div>
+                    </div>
+                    <!-- end row -->
+                  </div>
+                  <!-- end container -->
+                </section>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="tab-content">
+                <div id="tab1" class="tab-pane active">
+                  <!-- Question Listing -->
+                  <div class="listing-grid">
+                    <% for(var i = 0; i< questions.length; i++){%>
+                    <div class="row">
+                      <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+                        <a data-toggle="tooltip" data-placement="bottom" data-original-title="Martina Jaz" href="#">
+													<img alt="" class="img-responsive center-block" src="images/Knowledge.jpg">
+												</a>
+                      </div>
+                      <div class="col-md-7 col-sm-8  col-xs-12">
+                        <h3><a  href="/members/question/detail/<%= questions[i]._id %>"><%= questions[i].title%></a></h3>
+                        <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i><%= questions[i].timeago%></span> <span><i class="fa fa fa-eye" aria-hidden="true"></i> <%= questions[i].hits %> Views</span>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-sm-2 col-xs-12">
+                        <ul class="question-statistic">
+                          <li class="active"> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Answers"><span><%= questions[i].answers %></span></a>
+                          </li>
+                          <!-- <li> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span>0</span></a>
+                          </li> -->
+                        </ul>
+                      </div>
+                    </div>
+                    <% } %>
+                  </div>
+                  <!-- Question Listing End -->
+
+                </div>
+                <!-- Pagination View More -->
+                <div class="container-fluid">
+                <div class="form-group row clearfix">
+                      <div class="col-md-10">
+                        <nav>
+                            <ul class="pagination">
+                              <li class="page-item <%= (paging.currpage == 1)? 'disabled':'' %>">
+                                <a class="page-link" href="javascript:go(<%= (paging.currpage == 1)?-1:(paging.currpage-1)%>)" tabindex="-1">Prev</a>
+                              </li>
+                              <% for (var i=paging.start; i<= paging.end; i++){%>
+                                <li class="page-item <%= (i == paging.currpage)?'active':''%>">
+                                  <a class="page-link" href="javascript:go(<%=i%>)"><%=i%></a>
+                                </li>
+                              <%}%>
+                              <li class="page-item <%= (paging.currpage == paging.total)? 'disabled':'' %>">
+                                <a class="page-link" href="javascript:go(<%= (paging.currpage == paging.total)?-1:(paging.currpage+1) %>)">Next</a>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <select class="selectpicker form-control show-tick" name="perpage" id="perpage" size="1">
+                          <option value="3">Show 3 entries</option>
+                          <option value="5">Show 5 entries</option>
+                          <option value="10">Show 10 entries</option>
+                          <option value="20">Show 20 entries</option>
+                          <option value="1000">Show All entries</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Pagination View More End -->
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <!-- end container -->
+    </section>
+  </form>
+</div>
+    <!-- =-=-=-=-=-=-= Latest Questions  End =-=-=-=-=-=-= -->
+  <% include ../partial/footer %>
+  <% include ../partial/script %>
+  <script src="/js/demo.js"></script>
+  <script type="text/javascript">
+    function go(page){
+      if(page == -1 || page> <%=paging.total%>) return;
+      frm.currpage.value = page;
+      frm.submit();
+    }
+    $("#perpage").change(function() {
+      frm.submit();
+    });
+    $("#perpage").val(<%= paging.perpage %>);
+    function detail(id){
+      location.href = '/user/question';
+    }
+  </script>
+</body>
+
+</html>

@@ -132,7 +132,7 @@
           // select list on load
           $.ajax({
             method: "POST",
-            url: "/category",
+            url: "/admin/category",
             data: {name: "Jhon", location: "Boston"}
           }).done(function( rtn ){
             var dTable = document.getElementById('dTable');
@@ -182,7 +182,7 @@
             $modal.modal('show');
             $.ajax({
               method: "POST",
-              url: "/view/"+id
+              url: "/admin/category/view/"+id
             }).done(function( rtn ){
 
               var categories = rtn.categories;
@@ -200,10 +200,10 @@
             var catid = document.getElementById('catid').value;
             $.ajax({
               method: "POST",
-              url: "/category/modify",
+              url: "/admin/category/modify",
               data:{'myanmarname':name1, 'catid': catid},
               success: function (resultData) {
-                  location.href = '/category';
+                  location.href = '/admin/category';
               },
             }).done(function(rtn){
               console.log(rtn);
@@ -218,7 +218,7 @@
             $modal.modal('show');
             $.ajax({
               method: "POST",
-              url: "/add/"+id
+              url: "/admin/category/add/"+id
             }).done(function( rtn ){
               var categories = rtn.categories;
               console.log(categories._id);
@@ -234,10 +234,10 @@
           var name1 = document.getElementById('myanmarname1').value;
           $.ajax({
             method: "POST",
-            url: "/category/add",
+            url: "/admin/category/add",
             data:{'myanmarname':name1},
             success: function (resultData) {
-                location.href = '/category';
+                location.href = '/admin/category';
             },
           }).done(function(rtn){
             console.log(rtn);
@@ -253,7 +253,7 @@
            $modal.modal('show');
            $.ajax({
              method: "POST",
-             url: "/dele/"+id
+             url: "/admin/category/dele/"+id
            }).done(function( rtn ){
              var categories = rtn.categories;
              console.log(categories._id);
@@ -271,10 +271,10 @@
          var catid = document.getElementById('catid').value;
          $.ajax({
            method: "POST",
-           url: "/category/dele",
+           url: "/admin/category/dele",
            data:{'myanmarname':name1, 'catid': catid},
            success: function (resultData) {
-               location.href = '/category';
+               location.href = '/admin/category';
            },
          }).done(function(rtn){
            console.log(rtn);
@@ -286,7 +286,7 @@
 
         });
         function detail(id){
-          location.href = '/view/'+id;
+          location.href = '/admin/category/view/'+id;
         }
 
 

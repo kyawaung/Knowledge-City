@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partial/head %>
+  <title>Knowledge Q&A Dashboard Template</title>
+</head>
+
+<body>
+  <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
+  <div class="preloader"><span class="preloader-gif"></span>
+  </div>
+  <% include ../partial/header %>
+
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+<!--  <div class="main-content-area">-->
+
+
+
+    <!-- =-=-=-=-=-=-= Post Question  =-=-=-=-=-=-= -->
+    <section class="section-padding-80 white" id="question-confirm">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-8 ">
+
+            <div class="box-panel">
+
+              <h1>Confirm Your Question</h1>
+              <hr>
+              <div class="post">
+            		<header class="post-header">
+            			<h2><%= que.title %></h2>
+            			<div class="post-meta">
+            				<div class="post-meta-item">
+            					<i class="fa fa-folder-o"></i> <%= que.category.name.my %>
+            				</div>
+            			</div>
+            		</header>
+            		<div class="row">
+            			<div class="col col-lg-9 col-md-9">
+                    <p></p>
+                    <center><b><a href="/members/question/list" id="list">Go to Question list</a></b></center>
+                  </div>
+                </div>
+                      	<hr>
+                        <div class="text-center">
+                          <button type="button" class="btn btn-lg btn-primary" id="btnDelete">DELETE</button>
+                          <button type="button" class="btn btn-lg btn-primary" id="btnModify">MODIFY</button>
+                          <button type="button" class="btn btn-lg btn-primary" id="btnStart">CONFIRM</button>
+                        </div>
+
+                        <!-- </form> -->
+                      </div>
+            </div>
+          </div>
+
+          <!-- Blog Right Sidebar -->
+          <div class="col-sm-12 col-xs-12 col-md-4">
+
+          </div>
+          <!-- Blog Right Sidebar End -->
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Post QuestionEnd =-=-=-=-=-=-= -->
+
+  <!--</div>-->
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+
+  <% include ../partial/footer %>
+  <% include ../partial/script %>
+  <!-- For THis Page Only -->
+  <script src="js/select2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.tagsinput.min.js"></script>
+  <script type="text/javascript">
+    $('#btnModify').click(function () {
+      location.href = '/members/question/modify/<%=que._id%>';
+    });
+
+    $('#btnStart').click(function () {
+      location.href = '/members/question/detail/<%=que._id%>';
+    });
+
+    $('#btnDelete').click(function () {
+      if(confirm('Are you sure? After click to DELETE button, your campaign will delete.'))
+      location.href= '/members/question/delete/'+'<%= que._id %>';
+    });
+  </script>
+  <script type="text/javascript">
+  btnStart.onclick = function() {
+    var formData = {
+      questionTitle: frm.questionTitle.value,
+      category: frm.category.value
+     }
+    $.post('/members/question/view/<%= que._id %>',
+          formData,
+          function(data, status, xhr) {
+          }).done(function(rtn) {
+            alert('Request done!');
+            location.href= "/members/question/view/"+rtn.id;
+          }).fail(function(jqxhr, settings, ex) {
+            alert('failed, ' + ex);
+          });
+  }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partial/head %>
+  <title>Knowledge Q&A Dashboard Template</title>
+</head>
+
+<body>
+  <!-- =-=-=-=-=-=-= PRELOADER =-=-=-=-=-=-= -->
+  <div class="preloader"><span class="preloader-gif"></span>
+  </div>
+  <% include ../partial/header %>
+
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+<!--  <div class="main-content-area">-->
+
+
+
+    <!-- =-=-=-=-=-=-= Post Question  =-=-=-=-=-=-= -->
+    <section class="section-padding-80 white" id="post-question">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-8 ">
+
+            <div class="box-panel">
+
+              <h2>Share Your Knowledge</h2>
+              <hr>
+              <!-- form login -->
+              <form class="margin-top-40" id="frm" method="post" action="/members/knowledge/add" name="frm">
+                <div class="form-group">
+                  <label>Knowledge Title <span class="required">*</span></label>
+                  <input type="text" name="knowledgeTitle" id="knowledgeTitle" placeholder="Your knowledge title" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Category <span class="required">*</span></label>
+                  <select class="questions-category form-control" name="category" id="category">
+                    <option>All Category</option>
+                    <% for(var i = 0; i< cate.length; i++){%>
+                    <option value="<%= cate[i]._id %>"><%= cate[i].name.my %></option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Knowledge Detials <span class="required">*</span></label>
+                  <textarea cols="12" rows="12" placeholder="Post Your Question Details Here....." id="message" name="message" class="form-control"></textarea>
+                </div>
+
+                <button type="button" id="save" class="btn btn-primary pull-right">Share Your Knowledge</button>
+
+              </form>
+              <!-- form login -->
+
+            </div>
+          </div>
+
+          <!-- Blog Right Sidebar -->
+          <div class="col-sm-12 col-xs-12 col-md-4">
+
+          </div>
+          <!-- Blog Right Sidebar End -->
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Post QuestionEnd =-=-=-=-=-=-= -->
+
+  <!--</div>-->
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+
+  <% include ../partial/footer %>
+  <% include ../partial/script %>
+  <!-- For THis Page Only -->
+  <script src="js/select2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.tagsinput.min.js"></script>
+  <script type="text/javascript">
+        save.onclick = function() {
+          var formData = {
+            knowledgeTitle: frm.knowledgeTitle.value,
+            message: frm.message.value,
+            category: frm.category.value
+           }
+          console.log('Aye Thandar Khine', formData);
+          $.post('/members/knowledge/add',
+                formData,
+                function(data, status, xhr) {
+                }).done(function(rtn) {
+                  console.log('Nay Linn Oo', rtn);
+                  alert('Request done!');
+                  location.href= "/members/knowledge/view/"+rtn.id;
+                }).fail(function(jqxhr, settings, ex) {
+                  console.log(jqxhr, settings, ex);
+                  alert('failed, ' + ex);
+                });
+        }
+  </script>
+</body>
+
+</html>

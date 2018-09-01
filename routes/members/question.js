@@ -11,9 +11,9 @@ router.get('/add', function(req, res, next) {
   Category.find({}, function(err, rtn) {
     if (err) throw err;
     if (rtn) {
-        res.render('members/question/question-add', {
-      cate: rtn
-      });
+          res.render('members/question/question-add', {
+        cate: rtn
+        });
     } else {
       throw new Error('Data not found!');
     }
@@ -128,6 +128,7 @@ router.post('/modify', function(req, res, next) {
   //GET Question Detail.
 router.get('/detail/:id', function(req, res, next){
   Question.findByIdAndUpdate(req.params.id,{$inc:{hits:1}}).exec(function(err, rtn) {
+    console.log('Nay Linn Oo', rtn);
     if (err) throw err;
     if (rtn) {
       rtn.timeago = timeAgo(rtn.inserted);
@@ -149,7 +150,7 @@ router.get('/detail/:id', function(req, res, next){
 });//End get question detail.
 
 // POST answer add action.
-router.post('/detail', function(req, res, next) {
+router.post('/answer', function(req, res, next) {
   var answer = new Answer();
   answer.answer = req.body.answer;
   answer.question = req.body.question;
@@ -164,7 +165,6 @@ router.post('/detail', function(req, res, next) {
       });
     });
   })
-
 });//End answer add action.
 
 module.exports = router;

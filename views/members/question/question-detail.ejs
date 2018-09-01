@@ -70,7 +70,7 @@
 
               <div class="clearfix"></div>
 
-              <form id="frm" name="frm" method="POST" action="/members/question/detail">
+              <form id="frm" name="frm" method="POST" action="/members/question/answer">
                 <input type="hidden" name="que_id" value="<%= que._id %>">
                 <div class="form-group">
                   <label>Post Your Answer</label>
@@ -188,7 +188,7 @@
             answer: frm.answer.value,
             question: frm.que_id.value,
            }
-          $.post('/members/question/detail',
+          $.post('/members/question/answer',
                 formData,
                 function(data, status, xhr) {
                 }).done(function(rtn) {

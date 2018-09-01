@@ -3,6 +3,11 @@ var router = express.Router();
 var User = require('../model/User');
 
 /* GET signup page. */
+router.get('/', function(req, res, next) {
+  res.render('index',{title:'Home'});
+});//End signup page.
+
+/* GET signup page. */
 router.get('/signup', function(req, res, next) {
   res.render('members/commons/sign-up');
 });//End signup page.
@@ -52,6 +57,7 @@ router.post('/signin', function(req, res, next) {
   });
 });//End signin action.
 
+// TODO delete when deploy
 /* INIT admin account  */
 router.get('/init', function(req, res, next) {
   // make model using req.body
@@ -83,15 +89,5 @@ router.get('/signout', function(req, res, next) {
   req.session.destroy();
   res.redirect('/members');
 });//End signout.
-
-/* GET profile page. */
-router.get('/profile', function(req, res, next) {
-  res.render('members/commons/profile');
-});//End profile page.
-
-/* GET profile-setting page. */
-router.get('/setting', function(req, res, next) {
-        res.render('members/commons/profile-setting');
-});//End profile-setting page.
 
 module.exports = router;

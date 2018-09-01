@@ -12,25 +12,27 @@
       </div>
       <div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
         <ul class="top-nav nav-right">
-          <li><a href="/signin"><i class="fa fa-lock" aria-hidden="true"></i>အေကာင့္၀င္ရန္</a>
-          </li>
-          <li><a href="/signup"><i class="fa fa-user-plus" aria-hidden="true"></i>အေကာင့္သစ္လုပ္ရန္</a>
-          </li>
+          <% if(!user) { %>
+            <li><a href="/signin"><i class="fa fa-lock" aria-hidden="true"></i>အေကာင့္၀င္ရန္</a>
+            </li>
+            <li><a href="/signup"><i class="fa fa-user-plus" aria-hidden="true"></i>အေကာင့္သစ္လုပ္ရန္</a> </li>
+          <%} else {%>
             <li class="dropdown">
             <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">
             <img class="img-circle resize" alt="" src="/images/authors/13.jpg">
             <span class="hidden-xs small-padding">
-              <span>Umair</span>
+              <span><%= user.name %></span>
              <i class="fa fa-caret-down"></i>
             </span>
           </a>
             <ul class="dropdown-menu ">
-              <li><a href="/profile"><i class=" icon-bargraph"></i> Dashboard</a></li>
-              <li><a href="/setting"><i class=" icon-gears"></i> Profile Setting</a></li>
+              <li><a href="/members/profile"><i class=" icon-bargraph"></i> Dashboard</a></li>
+              <li><a href="/members/setting"><i class=" icon-gears"></i> Profile Setting</a></li>
               <li><a href="question-list.html"><i class="icon-heart"></i> Questions</a></li>
               <li><a href="/signout"><i class="icon-lock"></i> Logout</a></li>
             </ul>
           </li>
+          <% } %>
         </ul>
       </div>
     </div>
